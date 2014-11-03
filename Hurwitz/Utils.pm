@@ -29,7 +29,7 @@ sub take {
     my ($n, $fh) = @_;
     my @return;
     for (my $i = 0; $i < $n; $i++) {
-        my $line = <$fh>;
+        chomp(my $line = <$fh>);
         push @return, $line;
     }
     @return;

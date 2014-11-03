@@ -68,12 +68,12 @@ is(
 open my $fh, '<', catfile($Bin, qw[data words]);
 is(
     join(', ', take(5, $fh)),
-    join(', ', map { "$_\n" } qw[A a aa aal aalii]),
+    join(', ', qw[A a aa aal aalii]),
     'take 5 OK'
 );
 
 is(
     join(':', take(3, $fh)),
-    join(':', map { "$_\n" } qw[aam Aani aardvark]),
+    join(':', qw[aam Aani aardvark]),
     'take 3 OK'
 );
