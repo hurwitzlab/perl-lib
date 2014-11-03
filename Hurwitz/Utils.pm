@@ -27,11 +27,13 @@ sub commify {
 # ----------------------------------------------------
 sub take {
     my ($n, $fh) = @_;
+
     my @return;
     for (my $i = 0; $i < $n; $i++) {
         chomp(my $line = <$fh>);
         push @return, $line;
     }
+
     @return;
 }
 
@@ -61,3 +63,59 @@ sub timer_calc {
 }
 
 1;
+
+# ----------------------------------------------------
+=pod
+
+=head1 NAME
+
+Hurwitz::Utils - utilities
+
+=head1 SYNOPSIS
+
+  use Hurwitz::Utils qw'commify ...';
+
+=head1 DESCRIPTION
+
+This module contains general-purpose routines, all of which are
+exported by default.
+
+=head1 EXPORTED SUBROUTINES
+
+=head2 commify 
+
+Puts a comma every three positions starting from the right.
+
+  print commify('1234567890'; # prints "1,234,567,890"
+
+=head2 take
+
+Takes a given number of lines from a filehandle, e.g., for reading in 
+chunks.
+
+  open my $fh, '<', 'file';
+  my @chunk1 = take(100, $fh);
+  my @chunk2 = take(35, $fh);
+
+=head2 timer_calc
+
+  my $timer = timer_calc();                 # use "now" for start
+  my $timer = timer_calc([gettimeofday()]); # set the start time
+  my $time  = $timer->();                   # uses "now" for end
+  my $time  = $timer->($end);               # pass in an end time
+
+Returns a closure to calculate the interveing time between start and
+execution.
+
+=head1 AUTHOR
+
+Ken Youens-Clark E<lt>kyclark@email.arizona.eduE<gt>
+
+=head1 COPYRIGHT
+
+Copyright (c) 2014 Hurwitz Lab
+
+This library is free software;  you can redistribute it and/or modify 
+it under the same terms as Perl itself.
+
+=cut
