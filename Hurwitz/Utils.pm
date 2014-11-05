@@ -30,7 +30,9 @@ sub take {
 
     my @return;
     for (my $i = 0; $i < $n; $i++) {
-        chomp(my $line = <$fh>);
+        my $line = <$fh>;
+        last if !defined $line;
+        chomp($line);
         push @return, $line;
     }
 
