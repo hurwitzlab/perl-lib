@@ -6,13 +6,13 @@ author         'Ken Youens-Clark <kyclark@email.arizona.edu>';
 version        '0.01';
 license        'GPL';
 
-requires 'List::Util'      => '';
-requires 'List::MoreUtils' => '';
-requires 'Time::HiRes'     => '';
-requires 'Time::Interval'  => '';
+requires 'List::Util'      => '1.38';
+requires 'List::MoreUtils' => '0.33';
+requires 'Time::HiRes'     => '1.9725';
+requires 'Time::Interval'  => '1.233';
 
-test_requires 'Test::Exception' => '';
-test_requires 'Test::Exports'   => '';
-test_requires 'Test::More'      => '';
+test_requires 'Test::Exception' => '0.32';
+test_requires 'Test::Exports'   => '1';
+test_requires 'Test::More'      => '1.001009';
 
 WriteAll;
