@@ -7,7 +7,7 @@ use FindBin '$Bin';
 use File::Spec::Functions 'catfile';
 use Test::Exports;
 use Test::Exception;
-use Test::More tests => 11;
+use Test::More tests => 12;
 
 my @subs = qw(timer_calc take);
 
@@ -76,4 +76,11 @@ is(
     join(':', take(3, $fh)),
     join(':', qw[aam Aani aardvark]),
     'take 3 OK'
+);
+
+open my $single, '<', catfile($Bin, qw[data single]);
+is(
+    join('', take(2, $single)),
+    'this is just one line',
+    'take too many OK',
 );
