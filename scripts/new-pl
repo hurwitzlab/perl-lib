@@ -47,8 +47,7 @@ it under the same terms as Perl itself.
 
 # --------------------------------------------------
 
-use strict;
-use warnings;
+use common::sense;
 use Cwd;
 use Config;
 use English qw(-no_match_vars);
@@ -173,10 +172,8 @@ __DATA__
 [%- SET end_tag    = '__END__' -%]
 #![% perl_path %]
 
-use strict;
-use warnings;
+use common::sense;
 use autodie;
-use feature 'say';
 use Getopt::Long;
 use Pod::Usage;
 use Readonly;
