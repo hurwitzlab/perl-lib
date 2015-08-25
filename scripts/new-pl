@@ -181,17 +181,25 @@ use Readonly;
 main();
 
 # --------------------------------------------------
-sub main {
-    my ($help, $man_page);
-    GetOptions(
-        'help' => \$help,
-        'man'  => \$man_page,
+sub get_args {
+    my %args;
+
+    GetOptions(\%args,
+        'help',
+        'man',
     ) or pod2usage(2);
 
-    if ($help || $man_page) {
+    return %args;
+}
+
+# --------------------------------------------------
+sub main {
+    my %args = get_args;
+
+    if ($args{'help'} || $args{'man_page'}) {
         pod2usage({
             -exitval => 0,
-            -verbose => $man_page ? 2 : 1
+            -verbose => $args{'man_page'} ? 2 : 1
         });
     }; 
 }
