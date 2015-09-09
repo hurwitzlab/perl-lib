@@ -54,6 +54,7 @@ use English qw(-no_match_vars);
 use Env qw($EDITOR);
 use File::Basename;
 use File::Spec::Functions;
+use File::Which 'which';
 use Getopt::Long;
 use IO::Prompt;
 use Template;
@@ -127,6 +128,7 @@ sub main {
             perl_path     => $perl_path,
             copyright     => $copyright,
             year          => (localtime)[5] + 1900,
+            env           => which('env'),
         },
         \$output
     ) or die $t->error;
@@ -170,7 +172,7 @@ sub get_defaults {
 __DATA__
 [%- SET pod_prefix = '='       -%]
 [%- SET end_tag    = '__END__' -%]
-#![% perl_path %]
+#![% env OR '/usr/bin/env' %] perl
 
 use common::sense;
 use autodie;
@@ -182,18 +184,27 @@ main();
 
 # --------------------------------------------------
 sub main {
-    my ($help, $man_page);
-    GetOptions(
-        'help' => \$help,
-        'man'  => \$man_page,
-    ) or pod2usage(2);
-
-    if ($help || $man_page) {
+    my %args = get_args();
+    if ($args{'help'} || $args{'man_page'}) {
         pod2usage({
             -exitval => 0,
-            -verbose => $man_page ? 2 : 1
+            -verbose => $args{'man_page'} ? 2 : 1
         });
     }; 
+
+    say "OK";
+}
+
+# --------------------------------------------------
+sub get_args {
+    my %args;
+    GetOptions(
+        \%args,
+        'help',
+        'man',
+    ) or pod2usage(2);
+
+    return %args;
 }
 
 [% end_tag %]
