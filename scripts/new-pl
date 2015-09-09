@@ -185,6 +185,7 @@ main();
 # --------------------------------------------------
 sub main {
     my %args = get_args();
+
     if ($args{'help'} || $args{'man_page'}) {
         pod2usage({
             -exitval => 0,
